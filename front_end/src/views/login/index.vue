@@ -6,15 +6,15 @@
         <h3 class="title">Login Form</h3>
       </div>
 
-      <el-form-item prop="username">
+      <el-form-item prop="email">
         <span class="svg-container">
-          <svg-icon icon-class="user" />
+          <svg-icon icon-class="email" />
         </span>
         <el-input
-          ref="username"
-          v-model="loginForm.username"
-          placeholder="Username"
-          name="username"
+          ref="email"
+          v-model="loginForm.email"
+          placeholder="Email"
+          name="email"
           type="text"
           tabindex="1"
           autocomplete="on"
@@ -74,16 +74,15 @@
 </template>
 
 <script>
-import { validUsername } from '@/utils/validate'
-import SocialSign from './components/SocialSignin'
+import { validEmail } from '@/utils/validate'
 
 export default {
   name: 'Login',
-  components: { SocialSign },
+  components: {},
   data() {
-    const validateUsername = (rule, value, callback) => {
-      if (!validUsername(value)) {
-        callback(new Error('Please enter the correct user name'))
+    const validateEmail = (rule, value, callback) => {
+      if (!validEmail(value)) {
+        callback(new Error('Please enter the correct user email'))
       } else {
         callback()
       }
@@ -97,11 +96,11 @@ export default {
     }
     return {
       loginForm: {
-        username: 'admin',
-        password: '111111'
+        email: 'admin@example.com',
+        password: 'password'
       },
       loginRules: {
-        username: [{ required: true, trigger: 'blur', validator: validateUsername }],
+        email: [{ required: true, trigger: 'blur', validator: validateEmail }],
         password: [{ required: true, trigger: 'blur', validator: validatePassword }]
       },
       passwordType: 'password',
@@ -128,8 +127,8 @@ export default {
     // window.addEventListener('storage', this.afterQRScan)
   },
   mounted() {
-    if (this.loginForm.username === '') {
-      this.$refs.username.focus()
+    if (this.loginForm.email === '') {
+      this.$refs.email.focus()
     } else if (this.loginForm.password === '') {
       this.$refs.password.focus()
     }

@@ -1,7 +1,7 @@
 import axios from 'axios'
 import { MessageBox, Message } from 'element-ui'
 import store from '@/store'
-import { getToken } from '@/utils/auth'
+import { getAll } from '@/utils/auth'
 
 // create an axios instance
 const service = axios.create({
@@ -15,11 +15,15 @@ service.interceptors.request.use(
   config => {
     // do something before request is sent
 
-    if (store.getters.token) {
+    if (store.getters.auth) {
       // let each request carry token
       // ['X-Token'] is a custom headers key
       // please modify it according to the actual situation
-      config.headers['X-Token'] = getToken()
+      // config.headers['X-Token'] = getToken()
+      const tokens = getAll()
+      config.headers['access-token'] = tokens['access-token']
+      config.headers['client'] = tokens['client']
+      config.headers['uid'] = tokens['uid']
     }
     return config
   },
@@ -43,10 +47,22 @@ service.interceptors.response.use(
    * You can also judge the status by HTTP Status Code
    */
   response => {
+    // 認証情報を保存
+    // const authHeaders = pick(response.headers, ['access-token', 'client', 'expiry', 'uid', 'token-type'])
+    // const authHeaders = pick(response.headers, ['access-token', 'client', 'expiry', 'uid'])
+    // store.commit('auth', authHeaders)
+    // const tokens = {
+    //   'access-token': authHeaders['access-token'],
+    //   'client': authHeaders['client'],
+    //   'uid': authHeaders['uid']
+    // }
+    // setAll(tokens)
+
+    // ユーザー情報
     const res = response.data
 
     // if the custom code is not 20000, it is judged as an error.
-    if (res.code !== 20000) {
+    if (response.status !== 200) {
       Message({
         message: res.message || 'Error',
         type: 'error',
