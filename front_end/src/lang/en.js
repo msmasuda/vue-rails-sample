@@ -76,6 +76,7 @@ export default {
     title: 'Login Form',
     logIn: 'Login',
     username: 'Username',
+    email: 'Email',
     password: 'Password',
     any: 'any',
     thirdparty: 'Or connect with',
