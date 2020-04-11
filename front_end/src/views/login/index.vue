@@ -3,18 +3,21 @@
     <el-form ref="loginForm" :model="loginForm" :rules="loginRules" class="login-form" autocomplete="on" label-position="left">
 
       <div class="title-container">
-        <h3 class="title">Login Form</h3>
+        <h3 class="title">
+          {{ $t('login.title') }}
+        </h3>
+        <lang-select class="set-language" />
       </div>
 
-      <el-form-item prop="email">
+      <el-form-item prop="username">
         <span class="svg-container">
-          <svg-icon icon-class="email" />
+          <svg-icon icon-class="user" />
         </span>
         <el-input
-          ref="email"
-          v-model="loginForm.email"
-          placeholder="Email"
-          name="email"
+          ref="username"
+          v-model="loginForm.username"
+          :placeholder="$t('login.username')"
+          name="username"
           type="text"
           tabindex="1"
           autocomplete="on"
@@ -31,7 +34,7 @@
             ref="password"
             v-model="loginForm.password"
             :type="passwordType"
-            placeholder="Password"
+            :placeholder="$t('login.password')"
             name="password"
             tabindex="2"
             autocomplete="on"
@@ -45,26 +48,30 @@
         </el-form-item>
       </el-tooltip>
 
-      <el-button :loading="loading" type="primary" style="width:100%;margin-bottom:30px;" @click.native.prevent="handleLogin">Login</el-button>
+      <el-button :loading="loading" type="primary" style="width:100%;margin-bottom:30px;" @click.native.prevent="handleLogin">
+        {{ $t('login.logIn') }}
+      </el-button>
 
       <div style="position:relative">
         <div class="tips">
-          <span>Username : admin</span>
-          <span>Password : any</span>
+          <span>{{ $t('login.username') }} : admin</span>
+          <span>{{ $t('login.password') }} : {{ $t('login.any') }}</span>
         </div>
         <div class="tips">
-          <span style="margin-right:18px;">Username : editor</span>
-          <span>Password : any</span>
+          <span style="margin-right:18px;">
+            {{ $t('login.username') }} : editor
+          </span>
+          <span>{{ $t('login.password') }} : {{ $t('login.any') }}</span>
         </div>
 
         <el-button class="thirdparty-button" type="primary" @click="showDialog=true">
-          Or connect with
+          {{ $t('login.thirdparty') }}
         </el-button>
       </div>
     </el-form>
 
-    <el-dialog title="Or connect with" :visible.sync="showDialog">
-      Can not be simulated on local, so please combine you own business simulation! ! !
+    <el-dialog :title="$t('login.thirdparty')" :visible.sync="showDialog">
+      {{ $t('login.thirdpartyTips') }}
       <br>
       <br>
       <br>
@@ -74,15 +81,17 @@
 </template>
 
 <script>
-import { validEmail } from '@/utils/validate'
+import { validUsername } from '@/utils/validate'
+import LangSelect from '@/components/LangSelect'
+import SocialSign from './components/SocialSignin'
 
 export default {
   name: 'Login',
-  components: {},
+  components: { LangSelect, SocialSign },
   data() {
-    const validateEmail = (rule, value, callback) => {
-      if (!validEmail(value)) {
-        callback(new Error('Please enter the correct user email'))
+    const validateUsername = (rule, value, callback) => {
+      if (!validUsername(value)) {
+        callback(new Error('Please enter the correct user name'))
       } else {
         callback()
       }
@@ -96,11 +105,11 @@ export default {
     }
     return {
       loginForm: {
-        email: 'admin@example.com',
-        password: 'password'
+        username: 'admin',
+        password: '111111'
       },
       loginRules: {
-        email: [{ required: true, trigger: 'blur', validator: validateEmail }],
+        username: [{ required: true, trigger: 'blur', validator: validateUsername }],
         password: [{ required: true, trigger: 'blur', validator: validatePassword }]
       },
       passwordType: 'password',
@@ -127,8 +136,8 @@ export default {
     // window.addEventListener('storage', this.afterQRScan)
   },
   mounted() {
-    if (this.loginForm.email === '') {
-      this.$refs.email.focus()
+    if (this.loginForm.username === '') {
+      this.$refs.username.focus()
     } else if (this.loginForm.password === '') {
       this.$refs.password.focus()
     }
@@ -295,6 +304,15 @@ $light_gray:#eee;
       margin: 0px auto 40px auto;
       text-align: center;
       font-weight: bold;
+    }
+
+    .set-language {
+      color: #fff;
+      position: absolute;
+      top: 3px;
+      font-size: 18px;
+      right: 0px;
+      cursor: pointer;
     }
   }
 
