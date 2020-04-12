@@ -1,4 +1,5 @@
 import axios from 'axios'
+import { pick } from 'lodash'
 import { MessageBox, Message } from 'element-ui'
 import store from '@/store'
 import { getAll } from '@/utils/auth'
@@ -32,21 +33,18 @@ service.interceptors.request.use(
 
 // response interceptor
 service.interceptors.response.use(
-  /**
-   * If you want to get http information such as headers or status
-   * Please return  response => response
-  */
-
-  /**
-   * Determine the request status by custom code
-   * Here is just an example
-   * You can also judge the status by HTTP Status Code
-   */
   response => {
+    // 認証情報を保存
+    const authHeaders = pick(response.headers, ['access-token', 'client', 'expiry', 'uid'])
+    console.log(authHeaders)
+    if (Object.keys(authHeaders).length) {
+      store.dispatch('user/setAuth', authHeaders)
+    }
+
     const res = response.data
 
     // if the custom code is not 20000, it is judged as an error.
-    if (res.code !== 20000) {
+    if (response.status !== 200) {
       Message({
         message: res.message || 'Error',
         type: 'error',

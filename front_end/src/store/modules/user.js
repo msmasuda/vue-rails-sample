@@ -1,9 +1,18 @@
 import { login, logout, getInfo } from '@/api/user'
-import { getToken, setToken, removeToken } from '@/utils/auth'
+import {
+  setToken,
+  setClient,
+  setUid,
+  removeToken,
+  removeClient,
+  removeUid
+} from '@/utils/auth'
 import router, { resetRouter } from '@/router'
 
 const state = {
-  token: getToken(),
+  token: '',
+  client: '',
+  uid: '',
   name: '',
   avatar: '',
   introduction: '',
@@ -13,6 +22,12 @@ const state = {
 const mutations = {
   SET_TOKEN: (state, token) => {
     state.token = token
+  },
+  SET_CLIENT: (state, client) => {
+    state.client = client
+  },
+  SET_UID: (state, uid) => {
+    state.uid = uid
   },
   SET_INTRODUCTION: (state, introduction) => {
     state.introduction = introduction
@@ -41,6 +56,21 @@ const actions = {
       }).catch(error => {
         reject(error)
       })
+    })
+  },
+
+  // 認証情報保存
+  setAuth({ commit }, auth) {
+    return new Promise(resolve => {
+      commit('SET_TOKEN', auth['access-token'])
+      commit('SET_CLIENT', auth['client'])
+      commit('SET_UID', auth['uid'])
+      setToken(auth['access-token'])
+      setClient(auth['client'])
+      setUid(auth['uid'])
+      // debug
+      commit('SET_ROLES', ['admin', 'editor'])
+      resolve()
     })
   },
 
@@ -77,14 +107,14 @@ const actions = {
     return new Promise((resolve, reject) => {
       logout(state.token).then(() => {
         commit('SET_TOKEN', '')
-        commit('SET_ROLES', [])
+        commit('SET_CLIENT', '')
+        commit('SET_UID', '')
         removeToken()
+        removeClient()
+        removeUid()
+        commit('SET_ROLES', [])
         resetRouter()
-
-        // reset visited views and cached views
-        // to fixed https://github.com/PanJiaChen/vue-element-admin/issues/2485
         dispatch('tagsView/delAllViews', null, { root: true })
-
         resolve()
       }).catch(error => {
         reject(error)
@@ -96,6 +126,11 @@ const actions = {
   resetToken({ commit }) {
     return new Promise(resolve => {
       commit('SET_TOKEN', '')
+      commit('SET_CLIENT', '')
+      commit('SET_UID', '')
+      removeToken()
+      removeClient()
+      removeUid()
       commit('SET_ROLES', [])
       removeToken()
       resolve()

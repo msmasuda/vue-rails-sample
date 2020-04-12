@@ -13,9 +13,9 @@ export function getAll() {
 }
 
 export function setAll(tokens) {
-  Cookies.set(TokenKey, tokens['access-token'])
-  Cookies.set(ClientKey, tokens['client'])
-  Cookies.set(UidKey, tokens['uid'])
+  Cookies.set(TokenKey, tokens[TokenKey])
+  Cookies.set(ClientKey, tokens[ClientKey])
+  Cookies.set(UidKey, tokens[UidKey])
   return
 }
 
