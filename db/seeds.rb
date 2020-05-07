@@ -7,4 +7,8 @@
 #   Character.create(name: 'Luke', movie: movies.first)
 
 puts 'ユーザー'
-User.create!(email: 'admin@example.com', password: 'password', password_confirmation: 'password')
+User.create!(username: 'admin', password: 'password', password_confirmation: 'password')
+
+puts '権限'
+Role.create!(role_id: 1, role_name: '管理者')
+Role.create!(role_id: 2, role_name: '一般')
