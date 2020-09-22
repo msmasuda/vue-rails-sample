@@ -14,27 +14,27 @@
                                       PUT    /users(.:format)                                                                         devise/registrations#update
                                       DELETE /users(.:format)                                                                         devise/registrations#destroy
                                       POST   /users(.:format)                                                                         devise/registrations#create
-                 new_api_user_session GET    /api/v1/auth/sign_in(.:format)                                                           devise_token_auth/sessions#new
-                     api_user_session POST   /api/v1/auth/sign_in(.:format)                                                           devise_token_auth/sessions#create
-             destroy_api_user_session DELETE /api/v1/auth/sign_out(.:format)                                                          devise_token_auth/sessions#destroy
-                new_api_user_password GET    /api/v1/auth/password/new(.:format)                                                      devise_token_auth/passwords#new
-               edit_api_user_password GET    /api/v1/auth/password/edit(.:format)                                                     devise_token_auth/passwords#edit
-                    api_user_password PATCH  /api/v1/auth/password(.:format)                                                          devise_token_auth/passwords#update
-                                      PUT    /api/v1/auth/password(.:format)                                                          devise_token_auth/passwords#update
-                                      POST   /api/v1/auth/password(.:format)                                                          devise_token_auth/passwords#create
-         cancel_api_user_registration GET    /api/v1/auth/cancel(.:format)                                                            devise_token_auth/registrations#cancel
-            new_api_user_registration GET    /api/v1/auth/sign_up(.:format)                                                           devise_token_auth/registrations#new
-           edit_api_user_registration GET    /api/v1/auth/edit(.:format)                                                              devise_token_auth/registrations#edit
-                api_user_registration PATCH  /api/v1/auth(.:format)                                                                   devise_token_auth/registrations#update
-                                      PUT    /api/v1/auth(.:format)                                                                   devise_token_auth/registrations#update
-                                      DELETE /api/v1/auth(.:format)                                                                   devise_token_auth/registrations#destroy
-                                      POST   /api/v1/auth(.:format)                                                                   devise_token_auth/registrations#create
+                 new_api_user_session GET    /api/v1/auth/sign_in(.:format)                                                           api/v1/auth/sessions#new {:format=>:json}
+                     api_user_session POST   /api/v1/auth/sign_in(.:format)                                                           api/v1/auth/sessions#create {:format=>:json}
+             destroy_api_user_session DELETE /api/v1/auth/sign_out(.:format)                                                          api/v1/auth/sessions#destroy {:format=>:json}
+                new_api_user_password GET    /api/v1/auth/password/new(.:format)                                                      api/v1/auth/passwords#new {:format=>:json}
+               edit_api_user_password GET    /api/v1/auth/password/edit(.:format)                                                     api/v1/auth/passwords#edit {:format=>:json}
+                    api_user_password PATCH  /api/v1/auth/password(.:format)                                                          api/v1/auth/passwords#update {:format=>:json}
+                                      PUT    /api/v1/auth/password(.:format)                                                          api/v1/auth/passwords#update {:format=>:json}
+                                      POST   /api/v1/auth/password(.:format)                                                          api/v1/auth/passwords#create {:format=>:json}
+         cancel_api_user_registration GET    /api/v1/auth/cancel(.:format)                                                            api/v1/auth/registrations#cancel {:format=>:json}
+            new_api_user_registration GET    /api/v1/auth/sign_up(.:format)                                                           api/v1/auth/registrations#new {:format=>:json}
+           edit_api_user_registration GET    /api/v1/auth/edit(.:format)                                                              api/v1/auth/registrations#edit {:format=>:json}
+                api_user_registration PATCH  /api/v1/auth(.:format)                                                                   api/v1/auth/registrations#update {:format=>:json}
+                                      PUT    /api/v1/auth(.:format)                                                                   api/v1/auth/registrations#update {:format=>:json}
+                                      DELETE /api/v1/auth(.:format)                                                                   api/v1/auth/registrations#destroy {:format=>:json}
+                                      POST   /api/v1/auth(.:format)                                                                   api/v1/auth/registrations#create {:format=>:json}
            api_v1_auth_validate_token GET    /api/v1/auth/validate_token(.:format)                                                    devise_token_auth/token_validations#validate_token
-                         api_api_root        /api                                                                                     Api::Root
-        rails_mandrill_inbound_emails POST   /rails/action_mailbox/mandrill/inbound_emails(.:format)                                  action_mailbox/ingresses/mandrill/inbound_emails#create
         rails_postmark_inbound_emails POST   /rails/action_mailbox/postmark/inbound_emails(.:format)                                  action_mailbox/ingresses/postmark/inbound_emails#create
            rails_relay_inbound_emails POST   /rails/action_mailbox/relay/inbound_emails(.:format)                                     action_mailbox/ingresses/relay/inbound_emails#create
         rails_sendgrid_inbound_emails POST   /rails/action_mailbox/sendgrid/inbound_emails(.:format)                                  action_mailbox/ingresses/sendgrid/inbound_emails#create
+  rails_mandrill_inbound_health_check GET    /rails/action_mailbox/mandrill/inbound_emails(.:format)                                  action_mailbox/ingresses/mandrill/inbound_emails#health_check
+        rails_mandrill_inbound_emails POST   /rails/action_mailbox/mandrill/inbound_emails(.:format)                                  action_mailbox/ingresses/mandrill/inbound_emails#create
          rails_mailgun_inbound_emails POST   /rails/action_mailbox/mailgun/inbound_emails/mime(.:format)                              action_mailbox/ingresses/mailgun/inbound_emails#create
        rails_conductor_inbound_emails GET    /rails/conductor/action_mailbox/inbound_emails(.:format)                                 rails/conductor/action_mailbox/inbound_emails#index
                                       POST   /rails/conductor/action_mailbox/inbound_emails(.:format)                                 rails/conductor/action_mailbox/inbound_emails#create
