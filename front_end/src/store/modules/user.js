@@ -66,7 +66,7 @@ const actions = {
       setClient(auth['client'])
       setUid(auth['uid'])
       // debug
-      commit('SET_ROLES', ['admin', 'editor'])
+      // commit('SET_ROLES', ['admin', 'editor'])
       resolve()
     })
   },

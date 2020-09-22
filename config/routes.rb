@@ -8,5 +8,8 @@ Rails.application.routes.draw do
           passwords: 'api/v1/auth/passwords'
       }
     end
+    namespace :v1 do
+      get '/user/info', to: 'users#info'
+    end
   end
 end
