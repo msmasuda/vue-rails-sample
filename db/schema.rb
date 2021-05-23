@@ -10,14 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_05_01_095638) do
-
-  create_table "roles", force: :cascade do |t|
-    t.integer "role_id"
-    t.string "role_name"
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
-  end
+ActiveRecord::Schema.define(version: 2020_04_04_133927) do
 
   create_table "users", force: :cascade do |t|
     t.string "provider", default: "email", null: false

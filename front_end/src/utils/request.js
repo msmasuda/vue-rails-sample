@@ -16,12 +16,12 @@ service.interceptors.request.use(
   config => {
     // do something before request is sent
 
-    if (store.getters.token) {
-      const tokens = getAll()
-      config.headers['access-token'] = tokens['TokenKey']
-      config.headers['client'] = tokens['ClientKey']
-      config.headers['uid'] = tokens['UidKey']
-    }
+    // if (store.getters.token) {
+    const tokens = getAll()
+    config.headers['access-token'] = tokens['TokenKey']
+    config.headers['client'] = tokens['ClientKey']
+    config.headers['uid'] = tokens['UidKey']
+    // }
     return config
   },
   error => {
