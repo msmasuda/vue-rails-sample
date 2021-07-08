@@ -62,7 +62,10 @@ export default {
     clipboardDemo: 'Clipboard',
     i18n: '多言語',
     externalLink: '外部リンク',
-    profile: 'プロフィール'
+    profile: 'プロフィール',
+    customer: '顧客情報',
+    edit_customer: '顧客情報変更',
+    new_customer: '顧客情報追加'
   },
   navbar: {
     dashboard: 'トップ',
@@ -172,5 +175,16 @@ export default {
     tagsView: 'Tags-View 開く',
     fixedHeader: 'Fixed Header',
     sidebarLogo: 'Sidebar Logo'
+  },
+  customer: {
+    name: '名前',
+    phone: '電話番号',
+    email: 'メールアドレス',
+    post_code: '郵便番号',
+    address: '住所',
+    prefecture: '都道府県',
+    gender: '性別',
+    birthday: '誕生日',
+    memo: 'メモ'
   }
 }

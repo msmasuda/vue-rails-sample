@@ -62,7 +62,10 @@ export default {
     clipboardDemo: 'Clipboard',
     i18n: 'I18n',
     externalLink: 'External Link',
-    profile: 'Profile'
+    profile: 'Profile',
+    customer: 'Customer',
+    edit_customer: 'Edit Customer',
+    new_customer: 'Add Customer'
   },
   navbar: {
     dashboard: 'Dashboard',
@@ -172,5 +175,16 @@ export default {
     tagsView: 'Open Tags-View',
     fixedHeader: 'Fixed Header',
     sidebarLogo: 'Sidebar Logo'
+  },
+  customer: {
+    name: 'Name',
+    phone: 'Phone',
+    email: 'Email',
+    post_code: 'Post Code',
+    address: 'Address',
+    prefecture: 'Prefecture',
+    gender: 'Gender',
+    birthday: '誕生日',
+    memo: 'Memo'
   }
 }
