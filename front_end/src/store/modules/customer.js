@@ -6,16 +6,7 @@ import {
 } from '@/api/customer'
 
 const state = {
-  customerAll: [],
-  name: '',
-  phone: '',
-  email: '',
-  post_code: '',
-  prefecture: '',
-  address: '',
-  gender: '',
-  birthday: '',
-  memo: ''
+  customerAll: []
 }
 
 const mutations = {

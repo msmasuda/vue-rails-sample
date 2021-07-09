@@ -184,7 +184,7 @@ export default {
     address: 'Address',
     prefecture: 'Prefecture',
     gender: 'Gender',
-    birthday: '誕生日',
+    birthday: 'Birthday',
     memo: 'Memo'
   }
 }

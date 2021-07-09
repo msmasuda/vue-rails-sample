@@ -6,6 +6,7 @@
       </router-link>
     </el-row>
     <CustomerTable
+      :key="key"
       :customers="customers"
       @handleEdit="doUpdate"
       @handleDelete="doDelete"
@@ -20,6 +21,11 @@ import { mapGetters } from 'vuex'
 export default {
   name: 'Customer',
   components: { CustomerTable },
+  data() {
+    return {
+      key: 0
+    }
+  },
   computed: {
     ...mapGetters({
       customers: 'customer/customerAll'
@@ -36,9 +42,12 @@ export default {
       })
     },
     doDelete(index, row) {
+      const ans = confirm('Register?')
+      if (!ans) return
       this.$store.dispatch('customer/deleteCustomer', row)
       this.$nextTick(() => {
         this.$store.dispatch('customer/getCustomers')
+        this.key = this.key ? 0 : 1
       })
     }
   }
