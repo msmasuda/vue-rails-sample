@@ -7,6 +7,7 @@
       :form="form"
       :process="process"
       @handleSubmit="handleSubmit"
+      @handleCancel="handleCancel"
     />
   </div>
 </template>
@@ -40,6 +41,9 @@ export default {
       if (!this.form.name) return
       // store/modules/customerのアクションeditCustomerを呼び出し、
       this.$store.dispatch('customer/editCustomer', this.form)
+      this.$router.push({ path: '/customer/index' })
+    },
+    handleCancel() {
       this.$router.push({ path: '/customer/index' })
     }
   }

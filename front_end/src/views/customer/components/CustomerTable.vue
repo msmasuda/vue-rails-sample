@@ -17,7 +17,7 @@
       :label="$t('customer.email')"
     />
     <el-table-column
-      prop="prefecture"
+      prop="test(prefecture)"
       :label="$t('customer.prefecture')"
     />
     <el-table-column
@@ -35,9 +35,7 @@
 
 <script>
 export default {
-  // 親要素からのデータの参照（親要素に記述されたカスタムタグからの値を受け取る変数）
   props: {
-    // getters経由 customerAll: state => state.customerAll
     customers: {
       type: Array,
       default() {
@@ -51,6 +49,9 @@ export default {
     },
     handleDelete(index, row) {
       this.$emit('handleDelete', index, row)
+    },
+    test(src) {
+      return src
     }
   }
 }

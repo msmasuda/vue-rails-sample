@@ -185,6 +185,11 @@ export default {
     prefecture: '都道府県',
     gender: '性別',
     birthday: '誕生日',
-    memo: 'メモ'
+    memo: 'メモ',
+    delete_message: '削除してもよろしいですか？'
+  },
+  gender: {
+    male: '男性',
+    female: '女性'
   }
 }

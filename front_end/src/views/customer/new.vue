@@ -7,6 +7,7 @@
       :form="form"
       :process="process"
       @handleSubmit="handleSubmit"
+      @handleCancel="handleCancel"
     />
   </div>
 </template>
@@ -35,6 +36,9 @@ export default {
     handleSubmit() {
       if (!this.form.name) return
       this.$store.dispatch('customer/createCustomer', this.form)
+      this.$router.push({ path: '/customer/index' })
+    },
+    handleCancel() {
       this.$router.push({ path: '/customer/index' })
     }
   }

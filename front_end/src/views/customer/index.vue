@@ -42,7 +42,7 @@ export default {
       })
     },
     doDelete(index, row) {
-      const ans = confirm('Register?')
+      const ans = confirm(this.$t('customer.delete_message'))
       if (!ans) return
       this.$store.dispatch('customer/deleteCustomer', row)
       this.$nextTick(() => {

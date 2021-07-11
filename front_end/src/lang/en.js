@@ -185,6 +185,11 @@ export default {
     prefecture: 'Prefecture',
     gender: 'Gender',
     birthday: 'Birthday',
-    memo: 'Memo'
+    memo: 'Memo',
+    delete_message: 'May I delete it?'
+  },
+  gender: {
+    male: 'Male',
+    female: 'Female'
   }
 }

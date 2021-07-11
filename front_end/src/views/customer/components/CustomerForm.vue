@@ -14,7 +14,7 @@
     </el-form-item>
     <el-form-item :label="$t('customer.prefecture')">
       <el-select v-model="form.prefecture" placeholder="都道府県選択">
-        <el-option label="北海道" value="0" />
+        <el-option v-for="option in options" :key="option.value" :label="option.text" :value="option.value" />
       </el-select>
     </el-form-item>
     <el-form-item :label="$t('customer.address')">
@@ -22,8 +22,8 @@
     </el-form-item>
     <el-form-item :label="$t('customer.gender')">
       <el-radio-group v-model="form.gender">
-        <el-radio label="Male" value="0" />
-        <el-radio label="Female" value="1" />
+        <el-radio :label="1">{{ $t('gender.male') }}</el-radio>
+        <el-radio :label="2">{{ $t('gender.female') }}</el-radio>
       </el-radio-group>
     </el-form-item>
     <el-form-item :label="$t('customer.birthday')">
@@ -37,7 +37,7 @@
     <el-form-item>
       <!-- クリックでonSubmitイベントが発火 -->
       <el-button type="primary" @click="handleSubmit">{{ process }}</el-button>
-      <el-button>Cancel</el-button>
+      <el-button @click="handleCancel">Cancel</el-button>
     </el-form-item>
   </el-form>
 </template>
@@ -68,6 +68,15 @@ export default {
       }
     }
   },
+  data() {
+    return {
+      options: [
+        { value: 1, text: '北海道' },
+        { value: 2, text: '東京都' },
+        { value: 3, text: '福岡県' }
+      ]
+    }
+  },
   methods: {
     onSubmit() {
       if (!this.form.name) return
@@ -77,6 +86,9 @@ export default {
     },
     handleSubmit() {
       this.$emit('handleSubmit')
+    },
+    handleCancel() {
+      this.$emit('handleCancel')
     }
   }
 }
