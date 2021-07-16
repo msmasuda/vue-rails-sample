@@ -14,7 +14,7 @@
     </el-form-item>
     <el-form-item :label="$t('customer.prefecture')">
       <el-select v-model="form.prefecture" placeholder="都道府県選択">
-        <el-option v-for="option in options" :key="option.value" :label="option.text" :value="option.value" />
+        <el-option v-for="option in prefectures" :key="option.value" :label="option.text" :value="option.value" />
       </el-select>
     </el-form-item>
     <el-form-item :label="$t('customer.address')">
@@ -22,8 +22,7 @@
     </el-form-item>
     <el-form-item :label="$t('customer.gender')">
       <el-radio-group v-model="form.gender">
-        <el-radio :label="1">{{ $t('gender.male') }}</el-radio>
-        <el-radio :label="2">{{ $t('gender.female') }}</el-radio>
+        <el-radio v-for="g in genders" :key="g.value" :label="g.value" border>{{ $t(g.text) }}</el-radio>
       </el-radio-group>
     </el-form-item>
     <el-form-item :label="$t('customer.birthday')">
@@ -66,17 +65,29 @@ export default {
       default() {
         return ''
       }
+    },
+    prefectures: {
+      type: Array,
+      default() {
+        return []
+      }
+    },
+    genders: {
+      type: Array,
+      default() {
+        return []
+      }
     }
   },
-  data() {
-    return {
-      options: [
-        { value: 1, text: '北海道' },
-        { value: 2, text: '東京都' },
-        { value: 3, text: '福岡県' }
-      ]
-    }
-  },
+  // data() {
+  //   return {
+  //     options: [
+  //       { value: 1, text: '北海道' },
+  //       { value: 2, text: '東京都' },
+  //       { value: 3, text: '福岡県' }
+  //     ]
+  //   }
+  // },
   methods: {
     onSubmit() {
       if (!this.form.name) return

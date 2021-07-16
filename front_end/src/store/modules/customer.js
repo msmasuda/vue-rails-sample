@@ -20,14 +20,23 @@ const getters = {
 }
 
 const actions = {
-  getCustomers({ commit, state }) {
+  getCustomers({ commit, state, rootState }) {
     return new Promise((resolve, reject) => {
       getCustomers(state.token).then(response => {
         const { data } = response
         if (!data) {
           reject('Verification failed, please Login again.')
         }
-        commit('SET_CUSTOMER_ALL', data)
+        const customers = data.map(customer => {
+          const prefecture = rootState.settings.prefectures.find(p => p.value === customer.prefecture)
+          const gender = rootState.settings.genders.find(g => g.value === customer.gender)
+          return {
+            ...customer,
+            _prefecture: prefecture.text,
+            _gender: gender.text
+          }
+        })
+        commit('SET_CUSTOMER_ALL', customers)
         resolve(data)
       }).catch(error => {
         reject(error)

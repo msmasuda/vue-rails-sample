@@ -4,6 +4,11 @@
     style="width: 100%"
   >
     <el-table-column
+      prop="id"
+      label="ID"
+      width="80"
+    />
+    <el-table-column
       prop="name"
       :label="$t('customer.name')"
       width="180"
@@ -17,7 +22,7 @@
       :label="$t('customer.email')"
     />
     <el-table-column
-      prop="test(prefecture)"
+      prop="_prefecture"
       :label="$t('customer.prefecture')"
     />
     <el-table-column
@@ -49,9 +54,6 @@ export default {
     },
     handleDelete(index, row) {
       this.$emit('handleDelete', index, row)
-    },
-    test(src) {
-      return src
     }
   }
 }

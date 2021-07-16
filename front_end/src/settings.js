@@ -31,5 +31,16 @@ module.exports = {
    * The default is only used in the production env
    * If you want to also use it in dev, you can pass ['production', 'development']
    */
-  errorLog: 'production'
+  errorLog: 'production',
+
+  prefectures: [
+    { value: 1, text: '北海道' },
+    { value: 2, text: '東京都' },
+    { value: 3, text: '福岡県' }
+  ],
+
+  genders: [
+    { value: 1, text: 'gender.male' },
+    { value: 2, text: 'gender.female' }
+  ]
 }
